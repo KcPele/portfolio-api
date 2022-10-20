@@ -1,13 +1,13 @@
 import {  Schema, model, InferSchemaType } from 'mongoose';
 const skillSchema = new Schema({
-    title: {type: String, required: true},
+    name: {type: String, required: true},
 
-    imgUrl: {
+    icon: {
         contentType: String,
         buffer: Buffer
     },
     owner: {type: Schema.Types.ObjectId, ref:"User"},
-    desc: {type: String, required: true},
+    bgColor: {type: String, required: true},
 
 
 },

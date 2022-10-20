@@ -1,13 +1,17 @@
-import {  Schema, model, InferSchemaType } from 'mongoose';
-const experienceSchema = new Schema({
-    title: {type: String, required: true},
+import {  Schema, model, Types } from 'mongoose';
+import WorkExperience, { IWorkExperience } from './workExperience';
 
-    imgUrl: {
-        contentType: String,
-        buffer: Buffer
-    },
+interface IExperience {
+    year: String,
+    works: Types.DocumentArray<IWorkExperience>,
+    owner: Types.ObjectId
+
+}
+
+const experienceSchema = new Schema<IExperience>({
+    year: {type: String, required: true},
     owner: {type: Schema.Types.ObjectId, ref:"User"},
-    desc: {type: String, required: true},
+    works: [WorkExperience],
 
 
 },
@@ -15,8 +19,5 @@ const experienceSchema = new Schema({
     timestamps: true
 })
 
-
-
-export type IExperience = InferSchemaType<typeof experienceSchema >
 
 export default model<IExperience>("Experience", experienceSchema)
