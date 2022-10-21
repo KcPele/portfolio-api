@@ -31,9 +31,29 @@ mongoose.connect("mongodb://localhost:27017/testApp")
 .catch(err => {
     console.log(err)
 })
-mongoose.connection.once("connected", () => {
-    console.log("connected to db")
-})
+mongoose.connection.on('connecting', function() {
+    console.log('connecting to MongoDB...');
+  });
+
+  mongoose.connection.on('error', function(error) {
+    console.error('Error in MongoDb connection: ' + error);
+    mongoose.disconnect();
+  });
+  mongoose.connection.on('connected', function() {
+    console.log('MongoDB connected!');
+  });
+  mongoose.connection.once('open', function() {
+    console.log('MongoDB connection opened!');
+  });
+  mongoose.connection.on('reconnected', function () {
+    console.log('MongoDB reconnected!');
+  });
+//   mongoose.connection.on('disconnected', function() {
+//     console.log('MongoDB disconnected!');
+//     mongoose.connect(dbURI, {server:{auto_reconnect:true}});
+//   });
+// mongoose.connect(dbURI, });
+
 app.use(cor({
     'allowedHeaders': ['sessionId', 'Content-Type'],
     'exposedHeaders': ['sessionId'],

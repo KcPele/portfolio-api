@@ -16,7 +16,7 @@ import sendMailRoute from "./routes/sendmail.js";
 import "dotenv/config";
 const app = express();
 const PORT = process.env.PORT || 4000;
-mongoose.connect("mongodb://localhost:27017/testApp")
+mongoose.connect(process.env.MONGODB_URL)
     .then(val => {
     console.log("connected");
 })
