@@ -7,13 +7,9 @@ const testimonialSchema = new Schema({
         contentType: String,
         buffer: Buffer
     },
-    owner: {type: Schema.Types.ObjectId, ref:"User"},
     feedback: {type: String, required: true},
 
 
-},
-{
-    timestamps: true
 })
 
 

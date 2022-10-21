@@ -6,8 +6,7 @@ const aboutSchema = new Schema({
         contentType: String,
         buffer: Buffer
     },
-    owner: {type: Schema.Types.ObjectId, ref:"User"},
-    desc: {type: String, required: true},
+    description: {type: String, required: true},
 
 
 },

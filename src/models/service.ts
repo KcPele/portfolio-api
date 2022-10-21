@@ -5,24 +5,24 @@ import User from './user';
 dotenv.config()
 
 
-const productSchema = new Schema({
+const serviceSchema = new Schema({
     name: {type: String, required: true},
     price: {type: Number, required: true},
     slug: {type: String},
-    img: {
+    imgUrl: {
         contentType: String,
         buffer: Buffer
     },
     owner: {type: Schema.Types.ObjectId, ref:"User"},
-    desc: {type: String, required: true},
+    description: {type: String, required: true},
 
 
 },
 {
     timestamps: true
 })
-productSchema.static('createNewProduct', async function createNewProduct(name: string, price: Number, contentType:string, buffer: Types.Buffer, token: string, desc: string) {
-    console.log(name)
+serviceSchema.static('createNewService', async function createNewService(name: string, price: Number, contentType:string, buffer: Types.Buffer, token: string, description: string) {
+
     try{
 
         const userId = jwt.verify(token, process.env.PRIVATE_KEY as string)as jwt.JwtPayload
@@ -32,8 +32,8 @@ productSchema.static('createNewProduct', async function createNewProduct(name: s
         } else {
 
            
-            const product = await Product.create({name, price, img: {contentType, buffer}, owner: user, desc})
-            return product
+            const service = await Service.create({name, price, img: {contentType, buffer}, owner: user, description})
+            return service
         }
     } catch(err: any) {
         return {"error": err.message as Error}
@@ -41,13 +41,13 @@ productSchema.static('createNewProduct', async function createNewProduct(name: s
   
 });
 
-productSchema.pre("save", function( next): void {
+serviceSchema.pre("save", function( next): void {
     this.slug = this.name.toLowerCase() + Date.now().toString()
     next()
 })
-export type IProduct = InferSchemaType<typeof productSchema >
-interface ProductModel  extends Model<IProduct>{
-    createNewProduct(name: string, price: Number, contentType:string, buffer: Types.Buffer, token: string, desc: string): Promise<HydratedDocument<IProduct>> | {error: string}
+export type IService = InferSchemaType<typeof serviceSchema >
+interface ServiceModel  extends Model<IService>{
+    createNewService(name: string, price: Number, contentType:string, buffer: Types.Buffer, token: string, desc: string): Promise<HydratedDocument<IService>> | {error: string}
 }
-const Product = model<IProduct, ProductModel>("Product", productSchema)
-export default Product 
+const Service = model<IService, ServiceModel>("Service", serviceSchema)
+export default Service 

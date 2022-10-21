@@ -4,9 +4,6 @@ const tagSchema = new Schema({
     tag: {type: String, required: true},
 
 
-},
-{
-    timestamps: true
 })
 
 
