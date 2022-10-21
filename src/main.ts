@@ -1,5 +1,6 @@
 import express from "express"
 import mongoose from "mongoose"
+import cor from "cors"
 import aboutRoute from "./routes/about"
 import tagsRoute from "./routes/tags"
 import worksRoute from "./routes/works"
@@ -22,6 +23,7 @@ declare global{
         }
     }
 }
+const PORT  = process.env.PORT || 4000
 mongoose.connect("mongodb://localhost:27017/testApp")
 .then(val => {
     console.log("connected")
@@ -32,6 +34,13 @@ mongoose.connect("mongodb://localhost:27017/testApp")
 mongoose.connection.once("connected", () => {
     console.log("connected to db")
 })
+app.use(cor({
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false
+  }))
 app.use(express.json())
 app.use("/tags", tagsRoute)
 app.use("/user", userRoutes)
@@ -45,6 +54,7 @@ app.use("/sendmail", sendMailRoute)
 app.use("/experience", experienceRoute)
 app.use("/testimonials", testimonialsRoute)
 app.use("/workexperience", workExperienceRoute)
-app.listen("4000", () => {
-    console.log("port 4000")
+
+app.listen(PORT, () => {
+    console.log(`port ${PORT}`)
 })

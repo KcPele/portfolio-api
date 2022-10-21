@@ -16,8 +16,8 @@ router.post("/",  async (req: express.Request, res: express.Response) => {
 
   try {
     await transporter.sendMail({
-      from: email,
-      to: "",
+      from: `${name} <${email}>`,
+      to: process.env.PUBLIC_SMTP_RECEIVER,
       subject: `Contact form submission from ${name}`,
       html: `<p>You have a contact form submission</p><br>
         <p><strong>Email: </strong> ${email}</p><br>
