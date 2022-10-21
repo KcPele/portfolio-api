@@ -13,7 +13,15 @@ import userRoutes  from "./routes/user"
 import serviceRoutes from "./routes/services"
 import sendMailRoute from "./routes/sendmail"
 import  "dotenv/config"
+
 const app = express()
+declare global{
+    export namespace Express{
+        interface Request{
+            userId: string
+        }
+    }
+}
 mongoose.connect("mongodb://localhost:27017/testApp")
 .then(val => {
     console.log("connected")

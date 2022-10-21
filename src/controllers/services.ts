@@ -1,6 +1,5 @@
 import express from "express"
 import Service, { IService } from "../models/service"
-import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
 
 
@@ -8,8 +7,8 @@ const createService = async (req: express.Request, res: express.Response) => {
     const {name, price, description} = req.body
     const contentType = req.file?.mimetype as string
     const buffer = req.file?.buffer as Types.Buffer
-    const token = req.headers.authorization?.split(" ")[1] as string
-    const service = await Service.createNewService(name, price, contentType, buffer, token, description)
+    const userId = req.userId
+    const service = await Service.createNewService(name, price, contentType, buffer, userId, description)
     res.status(200).json(service)
 }
 
@@ -28,7 +27,7 @@ if(req.file){
     
      try {
        
-        let query = {_id: id, owner: req.params?.userId}
+        let query = {_id: id, owner: req.userId}
         let service = await Service.findOneAndUpdate(query, update, {new: true}).catch(err =>{
             res.status(500).json({"error": "Not updated"})
         })
@@ -44,7 +43,7 @@ const deleteService = async (req: express.Request, res: express.Response) => {
  
      try {
       
-        let query = {_id: id, owner: req.params?.userId}
+        let query = {_id: id, owner: req.userId}
         let service = await Service.deleteOne(query).catch(err =>{
             res.status(500).json({"error": "Not deleted"})
         })

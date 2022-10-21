@@ -13,7 +13,7 @@ const createProfile = async (req: express.Request, res: express.Response) => {
     }
    
     try{
-            const owner = await User.findById(req.params?.userId)
+            const owner = await User.findById(req.userId)
             const profile = await Profile.create({name, imgUrl, owner })
             res.status(200).json(profile)
     } catch(err: any) {
@@ -35,7 +35,7 @@ if(req.file){
     }
 }
      try {
-        let query = {_id: id, owner: req.params?.userId}
+        let query = {_id: id, owner: req.userId}
         let profile = await Profile.findOneAndUpdate(query,  update, {new: true}).catch(err =>{
             res.status(500).json({"error": "Not updated"}) 
         })
@@ -49,7 +49,7 @@ if(req.file){
 const deleteProfile = async (req: express.Request, res: express.Response) => {
     const {id} = req.query
      try {
-        let query = {_id: id, owner: req.params?.userId}
+        let query = {_id: id, owner: req.userId}
         let profile = await Profile.deleteOne(query).catch(err =>{
             res.status(500).json({"error": "Not deleted"})
         })

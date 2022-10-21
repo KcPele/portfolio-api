@@ -1,5 +1,4 @@
 import {  Schema, HydratedDocument, model, InferSchemaType, Model, Types } from 'mongoose';
-import jwt from "jsonwebtoken"
 import * as dotenv from "dotenv"
 import User from './user';
 dotenv.config()
@@ -21,12 +20,11 @@ const serviceSchema = new Schema({
 {
     timestamps: true
 })
-serviceSchema.static('createNewService', async function createNewService(name: string, price: Number, contentType:string, buffer: Types.Buffer, token: string, description: string) {
+serviceSchema.static('createNewService', async function createNewService(name: string, price: Number, contentType:string, buffer: Types.Buffer, userId: string, description: string) {
 
     try{
 
-        const userId = jwt.verify(token, process.env.PRIVATE_KEY as string)as jwt.JwtPayload
-        const user = await User.findById(userId._id)
+        const user = await User.findById(userId)
         if(!user) {
             return {"error": "Invalid token"}
         } else {

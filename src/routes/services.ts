@@ -11,7 +11,7 @@ router.get("/",  async (req: express.Request, res: express.Response) => {
     res.status(200).json(service)
 })
 
-router.post("/", upload.single("file"), createService)
+router.post("/",tokenMiddleware, upload.single("file"), createService)
 
 
 router.put("/", tokenMiddleware, upload.single("file"), updateService)
