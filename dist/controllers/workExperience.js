@@ -1,4 +1,4 @@
-import WorkExperience from "../models/workExperience";
+import WorkExperience from "../models/workExperience.js";
 const createWorkExperience = async (req, res) => {
     const { name, company, description } = req.body;
     try {

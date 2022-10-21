@@ -1,4 +1,4 @@
-import Skill from "../models/skills";
+import Skill from "../models/skills.js";
 const createSkills = async (req, res) => {
     const { name, bgColor } = req.body;
     const iconUrl = {

@@ -1,7 +1,7 @@
 import express from "express";
-import Work from "../models/works";
-import { createWork, deleteWork, updateWork } from "../controllers/works";
-import { tokenMiddleware, upload } from "../middleware";
+import Work from "../models/works.js";
+import { createWork, deleteWork, updateWork } from "../controllers/works.js";
+import { tokenMiddleware, upload } from "../middleware/index.js";
 const router = express.Router();
 router.get("/", async (req, res) => {
     const data = await Work.find({}).populate("tags");

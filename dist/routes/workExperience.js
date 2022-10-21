@@ -1,7 +1,7 @@
 import express from "express";
-import WorkExperience from "../models/workExperience";
-import { createWorkExperience, deleteWorkExperience, updateWorkExperience } from "../controllers/workExperience";
-import { tokenMiddleware } from "../middleware";
+import WorkExperience from "../models/workExperience.js";
+import { createWorkExperience, deleteWorkExperience, updateWorkExperience } from "../controllers/workExperience.js";
+import { tokenMiddleware } from "../middleware/index.js";
 const router = express.Router();
 router.get("/", async (req, res) => {
     const data = await WorkExperience.find({});

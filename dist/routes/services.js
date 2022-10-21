@@ -1,7 +1,7 @@
 import express from "express";
-import Service from "../models/service";
-import { tokenMiddleware, upload } from "../middleware";
-import { createService, deleteService, updateService } from "../controllers/services";
+import Service from "../models/service.js";
+import { tokenMiddleware, upload } from "../middleware/index.js";
+import { createService, deleteService, updateService } from "../controllers/services.js";
 const router = express.Router();
 router.get("/", async (req, res) => {
     const service = await Service.find({});

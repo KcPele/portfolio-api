@@ -1,4 +1,4 @@
-import About from "../models/about";
+import About from "../models/about.js";
 const createAbout = async (req, res) => {
     const { title, description } = req.body;
     const imgUrl = {

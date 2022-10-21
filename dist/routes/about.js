@@ -1,7 +1,7 @@
 import express from "express";
-import About from "../models/about";
-import { createAbout, deleteAbout, updateAbout } from "../controllers/about";
-import { tokenMiddleware, upload } from "../middleware";
+import About from "../models/about.js";
+import { createAbout, deleteAbout, updateAbout } from "../controllers/about.js";
+import { tokenMiddleware, upload } from "../middleware/index.js";
 const router = express.Router();
 router.get("/", async (req, res) => {
     const about = await About.find({});

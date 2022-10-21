@@ -1,7 +1,7 @@
 import express from "express";
-import Tag from "../models/tags";
-import { createTag, deleteTag, updateTag } from "../controllers/tags";
-import { tokenMiddleware } from "../middleware";
+import Tag from "../models/tags.js";
+import { createTag, deleteTag, updateTag } from "../controllers/tags.js";
+import { tokenMiddleware } from "../middleware/index.js";
 const router = express.Router();
 router.get("/", async (req, res) => {
     const data = await Tag.find({});

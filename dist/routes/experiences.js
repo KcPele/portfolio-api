@@ -1,7 +1,7 @@
 import express from "express";
-import Experience from "../models/experiences";
-import { createExperience, deleteExperience, updateExperience } from "../controllers/experiences";
-import { tokenMiddleware } from "../middleware";
+import Experience from "../models/experiences.js";
+import { createExperience, deleteExperience, updateExperience } from "../controllers/experiences.js";
+import { tokenMiddleware } from "../middleware/index.js";
 const router = express.Router();
 router.get("/", async (req, res) => {
     const data = await Experience.find({}).populate("works");

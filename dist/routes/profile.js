@@ -1,7 +1,7 @@
 import express from "express";
-import Profile from "../models/profile";
-import { createProfile, deleteProfile, updateProfile } from "../controllers/profile";
-import { tokenMiddleware, upload } from "../middleware";
+import Profile from "../models/profile.js";
+import { createProfile, deleteProfile, updateProfile } from "../controllers/profile.js";
+import { tokenMiddleware, upload } from "../middleware/index.js";
 const router = express.Router();
 router.get("/", async (req, res) => {
     const profile = await Profile.find({});

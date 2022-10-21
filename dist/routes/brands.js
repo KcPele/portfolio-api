@@ -1,7 +1,7 @@
 import express from "express";
-import Brand from "../models/brands";
-import { createBrand, deleteBrand, updateBrand } from "../controllers/brands";
-import { tokenMiddleware, upload } from "../middleware";
+import Brand from "../models/brands.js";
+import { createBrand, deleteBrand, updateBrand } from "../controllers/brands.js";
+import { tokenMiddleware, upload } from "../middleware/index.js";
 const router = express.Router();
 router.get("/", async (req, res) => {
     const brand = await Brand.find({});

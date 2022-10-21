@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { Schema, model } from 'mongoose';
-import { createNewUser, loginUser } from "../controllers/user";
+import { createNewUser, loginUser } from "../controllers/user.js";
 const schema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true }

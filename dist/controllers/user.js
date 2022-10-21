@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
-import User from '../models/user';
+import User from '../models/user.js';
 const privateKey = process.env.PRIVATE_KEY;
 async function createNewUser(email, password) {
     const salt = await bcrypt.genSalt(10);

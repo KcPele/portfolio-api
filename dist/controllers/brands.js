@@ -1,4 +1,4 @@
-import Brand from "../models/brands";
+import Brand from "../models/brands.js";
 const createBrand = async (req, res) => {
     const { name } = req.body;
     const imgUrl = {

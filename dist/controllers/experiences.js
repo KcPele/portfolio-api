@@ -1,4 +1,4 @@
-import Experience from "../models/experiences";
+import Experience from "../models/experiences.js";
 const createExperience = async (req, res) => {
     const { year, works } = req.body;
     try {

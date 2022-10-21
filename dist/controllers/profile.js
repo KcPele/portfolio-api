@@ -1,5 +1,5 @@
-import User from "../models/user";
-import Profile from "../models/profile";
+import User from "../models/user.js";
+import Profile from "../models/profile.js";
 const createProfile = async (req, res) => {
     const { name } = req.body;
     const imgUrl = {

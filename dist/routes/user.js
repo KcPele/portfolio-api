@@ -1,5 +1,5 @@
 import express from "express";
-import User from "../models/user";
+import User from "../models/user.js";
 const router = express.Router();
 router.post("/login", async (req, res) => {
     const user = await User.loginUser(req.body.email, req.body.password);

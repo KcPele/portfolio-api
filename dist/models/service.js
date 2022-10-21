@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import * as dotenv from "dotenv";
-import User from './user';
+import User from './user.js';
 dotenv.config();
 const serviceSchema = new Schema({
     name: { type: String, required: true },

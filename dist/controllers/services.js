@@ -1,4 +1,4 @@
-import Service from "../models/service";
+import Service from "../models/service.js";
 const createService = async (req, res) => {
     const { name, price, description } = req.body;
     const contentType = req.file?.mimetype;

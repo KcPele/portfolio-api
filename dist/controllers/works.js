@@ -1,4 +1,4 @@
-import Work from "../models/works";
+import Work from "../models/works.js";
 const createWork = async (req, res) => {
     const { title, description, projectLink, codeLink, tags } = req.body;
     const imgUrl = {

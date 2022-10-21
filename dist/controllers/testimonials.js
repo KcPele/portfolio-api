@@ -1,4 +1,4 @@
-import Testimonial from "../models/testimonials";
+import Testimonial from "../models/testimonials.js";
 const createTestimonial = async (req, res) => {
     const { name, company, feedback } = req.body;
     const imgUrl = {
