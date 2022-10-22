@@ -4,10 +4,7 @@ const workSchema = new Schema({
     description: { type: String, required: true },
     projectLink: { type: String, required: true },
     codeLink: { type: String, required: true },
-    imgUrl: {
-        contentType: String,
-        buffer: Buffer
-    },
+    imgUrl: {type: String, required: true},
     tags: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
 });
 export default model("Work", workSchema);

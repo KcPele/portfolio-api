@@ -1,10 +1,8 @@
 import Work from "../models/works.js";
 const createWork = async (req, res) => {
+    res.status(200).json({"img": req.file.path})
     const { title, description, projectLink, codeLink, tags } = req.body;
-    const imgUrl = {
-        contentType: req.file?.mimetype,
-        buffer: req.file?.buffer
-    };
+    const imgUrl = req.file.path
     try {
         const jsonTags = JSON.parse(tags);
         const data = await Work.create({ title, description, projectLink, codeLink, imgUrl, tags: jsonTags });
@@ -23,10 +21,7 @@ const updateWork = async (req, res) => {
         update.tags = jsonTags;
     }
     if (req.file) {
-        update.imgUrl = {
-            contentType: req.file.mimetype,
-            buffer: req.file.buffer
-        };
+        update.imgUrl = req.file.path
     }
     try {
         let query = { _id: id };

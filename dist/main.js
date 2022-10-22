@@ -46,7 +46,8 @@ app.use("/sendmail", sendMailRoute);
 app.use("/experience", experienceRoute);
 app.use("/testimonials", testimonialsRoute);
 app.use("/workexperience", workExperienceRoute);
-app.listen(PORT, () => {
+app.listen(PORT, (e) => {
+    console.log(e)
     console.log(`port ${PORT}`);
 });
 //# sourceMappingURL=main.js.map

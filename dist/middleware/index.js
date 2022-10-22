@@ -1,6 +1,22 @@
 import multer from "multer";
 import jwt from "jsonwebtoken";
-const storage = multer.memoryStorage();
+import cloudinary from "cloudinary"
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import "dotenv/config";
+
+
+cloudinary.v2.config({
+    cloud_name: process.env.CLOUND_NAME,
+    api_key: process.env.CLOUND_API_KEY,
+    api_secret: process.env.CLOUND_API_SECRET
+})
+
+const storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: "portfolio"
+    }
+});
 export const upload = multer({ storage: storage });
 export const tokenMiddleware = (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
