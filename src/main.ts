@@ -24,7 +24,7 @@ declare global{
     }
 }
 const PORT  = process.env.PORT || 4000
-mongoose.connect("mongodb://localhost:27017/testApp")
+mongoose.connect(process.env.MONGODB_URL as string)
 .then(val => {
     console.log("connected")
 })

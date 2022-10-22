@@ -6,8 +6,8 @@ router.post("/login", async (req, res) => {
     res.status(200).json(user);
 });
 router.post("/register", async (req, res) => {
-    const user = await User.createNewUser(req.body.email, req.body.password);
-    res.status(200).json(user);
+    // const user = await User.createNewUser(req.body.email, req.body.password);
+    res.status(200).json({"error": "registration is onHold"});
 });
 export default router;
 //# sourceMappingURL=user.js.map
