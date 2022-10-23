@@ -6,10 +6,7 @@ const serviceSchema = new Schema({
     name: { type: String, required: true },
     price: { type: Number, required: true },
     slug: { type: String },
-    imgUrl: {
-        contentType: String,
-        buffer: Buffer
-    },
+    imgUrl: { type: String, required: true },
     owner: { type: Schema.Types.ObjectId, ref: "User" },
     description: { type: String, required: true },
 }, {
@@ -22,7 +19,7 @@ serviceSchema.static('createNewService', async function createNewService(name, p
             return { "error": "Invalid token" };
         }
         else {
-            const service = await Service.create({ name, price, img: { contentType, buffer }, owner: user, description });
+            const service = await Service.create({ name, price, imgUrl, owner: user, description });
             return service;
         }
     }

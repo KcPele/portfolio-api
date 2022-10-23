@@ -1,10 +1,7 @@
 import About from "../models/about.js";
 const createAbout = async (req, res) => {
     const { title, description } = req.body;
-    const imgUrl = {
-        contentType: req.file?.mimetype,
-        buffer: req.file?.buffer
-    };
+    const imgUrl = req.file.path
     try {
         const data = await About.create({ title, description, imgUrl });
         res.status(200).json(data);
@@ -16,13 +13,9 @@ const createAbout = async (req, res) => {
 const updateAbout = async (req, res) => {
     const { id } = req.query;
     const { title, description } = req.body;
-    const update = { title, description };
-    if (req.file) {
-        update.imgUrl = {
-            contentType: req.file.mimetype,
-            buffer: req.file.buffer
-        };
-    }
+    const imgUrl =req.file.path
+    const update = { title, description, imgUrl };
+    
     try {
         let query = { _id: id };
         let data = await About.findOneAndUpdate(query, update, { new: true }).catch(err => {

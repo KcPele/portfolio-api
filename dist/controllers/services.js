@@ -1,10 +1,9 @@
 import Service from "../models/service.js";
 const createService = async (req, res) => {
     const { name, price, description } = req.body;
-    const contentType = req.file?.mimetype;
-    const buffer = req.file?.buffer;
     const userId = req.userId;
-    const service = await Service.createNewService(name, price, contentType, buffer, userId, description);
+    const imgUrl = req.file.path
+    const service = await Service.createNewService(name, price, imgUrl, userId, description);
     res.status(200).json(service);
 };
 const updateService = async (req, res) => {
@@ -12,10 +11,7 @@ const updateService = async (req, res) => {
     const { name, price, description } = req.body;
     const update = { name, price, description };
     if (req.file) {
-        update.imgUrl = {
-            contentType: req.file.mimetype,
-            buffer: req.file.buffer
-        };
+        update.imgUrl = req.file.path
     }
     try {
         let query = { _id: id, owner: req.userId };

@@ -2,10 +2,7 @@ import User from "../models/user.js";
 import Profile from "../models/profile.js";
 const createProfile = async (req, res) => {
     const { name } = req.body;
-    const imgUrl = {
-        contentType: req.file?.mimetype,
-        buffer: req.file?.buffer
-    };
+    const imgUrl = req.file.path
     try {
         const owner = await User.findById(req.userId);
         const profile = await Profile.create({ name, imgUrl, owner });
@@ -20,10 +17,7 @@ const updateProfile = async (req, res) => {
     const { name } = req.body;
     const update = { name };
     if (req.file) {
-        update.imgUrl = {
-            contentType: req.file.mimetype,
-            buffer: req.file.buffer
-        };
+        update.imgUrl = req.file.path
     }
     try {
         let query = { _id: id, owner: req.userId };

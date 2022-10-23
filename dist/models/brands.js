@@ -1,9 +1,6 @@
 import { Schema, model } from 'mongoose';
 const brandSchema = new Schema({
-    imgUrl: {
-        contentType: String,
-        buffer: Buffer
-    },
+    imgUrl: { type: String, required: true },
     name: { type: String, required: true },
 });
 export default model("Brand", brandSchema);

@@ -1,10 +1,7 @@
 import Skill from "../models/skills.js";
 const createSkills = async (req, res) => {
     const { name, bgColor } = req.body;
-    const iconUrl = {
-        contentType: req.file?.mimetype,
-        buffer: req.file?.buffer
-    };
+    const iconUrl = req.file.path
     try {
         const data = await Skill.create({ name, iconUrl, bgColor });
         res.status(200).json(data);
@@ -18,10 +15,7 @@ const updateSkills = async (req, res) => {
     const { name, bgColor } = req.body;
     const update = { name, bgColor };
     if (req.file) {
-        update.iconUrl = {
-            contentType: req.file.mimetype,
-            buffer: req.file.buffer
-        };
+        update.iconUrl = req.file.path
     }
     try {
         let query = { _id: id };

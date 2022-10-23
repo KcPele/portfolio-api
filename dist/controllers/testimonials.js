@@ -1,10 +1,7 @@
 import Testimonial from "../models/testimonials.js";
 const createTestimonial = async (req, res) => {
     const { name, company, feedback } = req.body;
-    const imgUrl = {
-        contentType: req.file?.mimetype,
-        buffer: req.file?.buffer
-    };
+    const imgUrl = req.file.path
     try {
         const data = await Testimonial.create({ name, imgUrl, company, feedback });
         res.status(200).json(data);
@@ -18,10 +15,7 @@ const updateTestiminial = async (req, res) => {
     const { name, company, feedback } = req.body;
     const update = { name, company, feedback };
     if (req.file) {
-        update.imgUrl = {
-            contentType: req.file.mimetype,
-            buffer: req.file.buffer
-        };
+        update.imgUrl = req.file.path
     }
     try {
         let query = { _id: id };

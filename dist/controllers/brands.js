@@ -1,10 +1,7 @@
 import Brand from "../models/brands.js";
 const createBrand = async (req, res) => {
     const { name } = req.body;
-    const imgUrl = {
-        contentType: req.file?.mimetype,
-        buffer: req.file?.buffer
-    };
+    const imgUrl = req.file.path
     try {
         const brand = await Brand.create({ name, imgUrl });
         res.status(200).json(brand);
@@ -18,10 +15,7 @@ const updateBrand = async (req, res) => {
     const { name } = req.body;
     const update = { name };
     if (req.file) {
-        update.imgUrl = {
-            contentType: req.file.mimetype,
-            buffer: req.file.buffer
-        };
+        update.imgUrl = req.file.path
     }
     try {
         let query = { _id: id };
