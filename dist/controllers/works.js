@@ -1,6 +1,5 @@
 import Work from "../models/works.js";
 const createWork = async (req, res) => {
-    res.status(200).json({"img": req.file.path})
     const { title, description, projectLink, codeLink, tags } = req.body;
     const imgUrl = req.file.path
     try {
