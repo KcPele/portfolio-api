@@ -12,7 +12,7 @@ cloudinary.v2.config({
 })
 
 const storage = new CloudinaryStorage({
-    cloudinary,
+    cloudinary: cloudinary.v2,
     params: {
         folder: "portfolio"
     }
